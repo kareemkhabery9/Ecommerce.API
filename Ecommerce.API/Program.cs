@@ -1,13 +1,15 @@
 
+using Ecommerce.API.Externals;
 using Ecommerce.Persistence.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using System.Threading.Tasks;
 
 namespace Ecommerce.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async void Main(string[] args)
         {
             #region Registration DI container
             var builder = WebApplication.CreateBuilder(args);
@@ -30,6 +32,10 @@ namespace Ecommerce.API
 
             var app = builder.Build();
 
+            await app.MigrateDataBaseAsync();
+
+            await app.SeedDataAsync();
+
             #region Configure PipeLine [MiddleWare]
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -46,7 +52,7 @@ namespace Ecommerce.API
             app.MapControllers(); 
             #endregion
 
-            app.Run();
+            await app.RunAsync();
         }
     }
 }
