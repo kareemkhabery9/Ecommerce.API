@@ -64,7 +64,7 @@ namespace Ecommerce.Persistence.Data.Data_Seed
 
 
         // Generic method to seed data from a JSON file into the specified DbSet
-        private async Task SeedDataFromJson<T, TKey>(string fileName, DbSet<T> dbSet) where T : BaseEntity<TKey>
+        private async Task SeedDataFromJson<T, TKey>(string fileName, DbSet<T> dbSet) where T : BaseClass<TKey>
         {
             var filePath = @"..\Ecommerce.Persistence\Data\Data Seed\JsonFiles\"+ fileName;
 
