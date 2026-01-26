@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Persistence.Data.Data_Seed
 {
-    internal class DataIntializer : IDataIntializer
+    public class DataIntializer : IDataIntializer
     {
         private readonly StoreDbContext _dbContext;
 

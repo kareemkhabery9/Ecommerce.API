@@ -59,7 +59,7 @@ namespace Ecommerce.Presentation.Controllers
         // GET:BaseUrl/api/products/types
         public async Task<ActionResult<IEnumerable<TypeDTO>>> GetAllTypesAsync()
         {
-            var types = await _productService.GetAllBrandsAsync();
+            var types = await _productService.GetAllTypesAsync();
             return Ok(types);
         }
 

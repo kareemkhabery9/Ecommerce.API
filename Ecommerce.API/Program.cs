@@ -1,8 +1,11 @@
 
 using Ecommerce.API.Externals;
 using Ecommerce.Domain.Contracts;
+using Ecommerce.Persistence.Data.Data_Seed;
 using Ecommerce.Persistence.Data.DbContexts;
 using Ecommerce.Persistence.Repositories;
+using Ecommerce.Services;
+using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.MappingProfile;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -29,9 +32,14 @@ namespace Ecommerce.API
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+            builder.Services.AddScoped<IDataIntializer, DataIntializer>();
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
+
+            builder.Services.AddScoped<IProductService, ProductService>();
+
 
 
             #endregion
