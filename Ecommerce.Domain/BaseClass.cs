@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Domain
 {
-    public class BaseEntity<TKey>
+    public class BaseClass<TKey>
     {
         public TKey Id { get; set; } = default!;
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Domain.ProductModule
 {
-    public class Product : BaseEntity<int>
+    public class Product : BaseClass<int>
     {
 
         public string Name { get; set; } = default!;
