@@ -36,8 +36,9 @@ namespace Ecommerce.API
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            builder.Services.AddAutoMapper(x => x.AddProfile<ProductProfile>());
+            builder.Services.AddAutoMapper(typeof(ServiceAssemblyReference).Assembly);
 
+          
             builder.Services.AddScoped<IProductService, ProductService>();
 
 
@@ -57,6 +58,8 @@ namespace Ecommerce.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
