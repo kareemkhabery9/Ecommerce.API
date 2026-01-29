@@ -11,6 +11,8 @@ namespace Ecommerce.Domain.Contracts
 
         Task<IEnumerable<TEntity>> GetAllAsync();
 
+        Task<IEnumerable<TEntity>> GetAllAsync(ISpecifications<TEntity, TKey> specifications);
+
         Task<TEntity?> GetByIdAsync(TKey id);
 
         Task AddAsync(TEntity entity);
