@@ -15,6 +15,7 @@ namespace Ecommerce.Domain.Contracts
 
         Task<TEntity?> GetByIdAsync(TKey id);
 
+        Task<TEntity?> GetByIdAsync(ISpecifications<TEntity, TKey> specifications);
         Task AddAsync(TEntity entity);
 
         void Update(TEntity entity);

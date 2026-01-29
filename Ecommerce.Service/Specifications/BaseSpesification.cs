@@ -11,7 +11,14 @@ namespace Ecommerce.Services.Specifications
 {
     internal abstract class BaseSpesification<TEntity, TKey> : ISpecifications<TEntity, TKey> where TEntity : BaseClass<TKey>
     {
+        protected BaseSpesification(Expression<Func<TEntity, bool>> criteriaExp)
+        {
+            Criteria = criteriaExp;
+        }
         public ICollection<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = [];
+
+        public Expression<Func<TEntity, bool>> Criteria { get; }
+
 
         //Fun to add all include expressions to a list of expressions
         protected void AddInclude( Expression<Func<TEntity,object>> includeExp)

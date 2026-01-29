@@ -20,6 +20,11 @@ namespace Ecommerce.Persistence
             var query = entryPoint;
             if (specifications is not null)
             {
+                if(specifications.Criteria is not null)
+                {
+                    query = query.Where(specifications.Criteria);
+                }
+
                 if (specifications.IncludeExpressions is not null && specifications.IncludeExpressions.Any())
                 {
                     //Aggregate is used to apply multiple include expressions to the query by taking the initial query and successively applying each include expression to it.
