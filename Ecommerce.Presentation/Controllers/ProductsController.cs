@@ -25,9 +25,9 @@ namespace Ecommerce.Presentation.Controllers
         // Get all products
         [HttpGet]
         // GET:BaseUrl/api/products
-        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProductsAsync()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProductsAsync(int? brandId, int? typeId)
         {
-            var products = await _productService.GetAllProductsAsync();
+            var products = await _productService.GetAllProductsAsync(brandId, typeId);
 
             return Ok(products);
         }
@@ -42,7 +42,7 @@ namespace Ecommerce.Presentation.Controllers
 
             return Ok(product);
         }
-
+        
 
         // Get all brands
         [HttpGet("brands")]
