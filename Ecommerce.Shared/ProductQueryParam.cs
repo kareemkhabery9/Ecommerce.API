@@ -14,6 +14,8 @@ namespace Ecommerce.Shared
 
         public string? search { get; set; }
 
+        public ProductSortingOptions? sort { get; set; }
+
 
     }
 }

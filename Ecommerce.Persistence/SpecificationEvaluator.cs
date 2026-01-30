@@ -31,6 +31,16 @@ namespace Ecommerce.Persistence
                     // it take parameters: the current state of the query and the current include expression from the collection.
                     query = specifications.IncludeExpressions.Aggregate(query, (currentQuery, incudeExp) => currentQuery.Include(incudeExp));
                 }
+
+                if(specifications.orderBy is not null)
+                {
+                    query = query.OrderBy(specifications.orderBy);
+                }
+
+                if (specifications.orderByDescending is not null)
+                {
+                    query = query.OrderByDescending(specifications.orderByDescending);
+                }
             }
             return query;
 
