@@ -15,20 +15,29 @@ namespace Ecommerce.Services.Specifications
         {
             Criteria = criteriaExp;
         }
+
+        #region Filteration
+        public Expression<Func<TEntity, bool>> Criteria { get; }
+        #endregion
+
+
+        #region Including
+
         public ICollection<Expression<Func<TEntity, object>>> IncludeExpressions { get; } = [];
 
-        public Expression<Func<TEntity, bool>> Criteria { get; }
+        //Fun to add all include expressions to a list of expressions
+        protected void AddInclude(Expression<Func<TEntity, object>> includeExp)
+        {
+            IncludeExpressions.Add(includeExp);
+        }
+        #endregion
+
+
+        #region Ordering
 
         public Expression<Func<TEntity, object>> orderBy { private set; get; }
 
         public Expression<Func<TEntity, object>> orderByDescending { private set; get; }
-
-
-        //Fun to add all include expressions to a list of expressions
-        protected void AddInclude( Expression<Func<TEntity,object>> includeExp)
-        {
-            IncludeExpressions.Add(includeExp);
-        }
 
 
         protected void AddOrderBy(Expression<Func<TEntity, object>> orderByExp)
@@ -39,7 +48,29 @@ namespace Ecommerce.Services.Specifications
         protected void AddOrderByDescending(Expression<Func<TEntity, object>> orderByDescExp)
         {
             orderByDescending = orderByDescExp;
+
         }
+        #endregion
+
+
+        #region Pagination
+
+        public int skip { private set; get; }
+
+        public int take { private set; get; }
+
+        public bool isPaginated { private set; get; }
+
+        protected void ApplyPagination(int PageSize, int PageIndex)
+        {
+            isPaginated = true;
+            skip = (PageIndex - 1) * PageSize;
+            take = PageSize;
+        }
+
+
+        #endregion
+
 
 
     }

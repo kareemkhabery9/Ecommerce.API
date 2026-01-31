@@ -44,6 +44,9 @@ namespace Ecommerce.Services.Specifications.ProductSpecifications
                     break;
             }
 
+
+            ApplyPagination(queryParam.PageSize, queryParam.PageIndex );
+
         }
 
 
