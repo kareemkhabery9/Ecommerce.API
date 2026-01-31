@@ -37,6 +37,8 @@ namespace Ecommerce.Services
             var spec = new ProductWithTypeAndBrandSpecification(queryParams);
             var Products = await _unitOfWork.GetRepository<Product, int>().GetAllAsync(spec);
 
+            var ProductWithCountSpec = new ProductsWithCountSpesifications(queryParams);
+            var TotalCount = await _unitOfWork.GetRepository<Product, int>().CountAsync(ProductWithCountSpec);
 
             var DataToReturn = _mapper.Map<IEnumerable<ProductDTO>>(Products);
             var CountOfReturnedData = DataToReturn.Count();
@@ -45,7 +47,7 @@ namespace Ecommerce.Services
                 (
                     queryParams.PageIndex,
                     CountOfReturnedData,
-                     0,
+                     TotalCount,
                     DataToReturn
                 );
 
