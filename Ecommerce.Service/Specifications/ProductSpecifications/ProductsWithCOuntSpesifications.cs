@@ -11,11 +11,9 @@ namespace Ecommerce.Services.Specifications.ProductSpecifications
     internal class ProductsWithCountSpesifications : BaseSpesification<Product, int>
     {
 
+        //Specification to get the count of products based on filtering criteria
         public ProductsWithCountSpesifications(ProductQueryParam queryParams)
-                : base(p => (!queryParams.brandId.HasValue || p.ProductBrandId == queryParams.brandId.Value) &&
-                    (!queryParams.typeId.HasValue || p.ProductTypeId == queryParams.typeId.Value) &&
-                    (string.IsNullOrEmpty(queryParams.search) || p.Name.ToLower().Contains(queryParams.search.ToLower()))
-            )
+                : base(ProductSpecificationsHelper.GetCriteria(queryParams))
         {
 
         }
