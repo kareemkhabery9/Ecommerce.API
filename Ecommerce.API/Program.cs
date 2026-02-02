@@ -9,6 +9,7 @@ using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.MappingProfile;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 using System.Threading.Tasks;
 
 namespace Ecommerce.API
@@ -41,6 +42,10 @@ namespace Ecommerce.API
           
             builder.Services.AddScoped<IProductService, ProductService>();
 
+            builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                return ConnectionMultiplexer.Connect(builder.Configuration.GetConnectionString("RedisConnection")!);
+            });
 
 
             #endregion
