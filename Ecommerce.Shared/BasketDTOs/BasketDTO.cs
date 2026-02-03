@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Shared.BasketDTOs
 {
-    public class BasketDTO
-    {
-        public string Id { get; set; } = default!;
-        ICollection<BasketItemsDTO> Items { get; set; } = [];
+    public record BasketDTO(string Id,ICollection<BasketItemsDTO> Items);
 
-    }
 }
