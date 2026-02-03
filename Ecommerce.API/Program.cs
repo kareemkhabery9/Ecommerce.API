@@ -48,6 +48,7 @@ namespace Ecommerce.API
             });
 
             builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+            builder.Services.AddScoped<IBasketService, BasketService>();
 
 
             #endregion

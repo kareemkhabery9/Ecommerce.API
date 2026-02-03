@@ -25,22 +25,16 @@ namespace Ecommerce.Persistence.Repositories
             var isCreatedOrUpdated =  await _database.StringSetAsync(basket.Id, jsonBasket,
                (timeToLive == default) ? TimeSpan.FromDays(7) : timeToLive);
 
-            if (isCreatedOrUpdated)
-            {
-                // Retrieve the basket back from Redis to ensure it was stored correctly
-                var BasketReturned = await _database.StringGetAsync(basket.Id);
-
-                // Deserialize the JSON string back to a CustomerBasket object before returning
-                return JsonSerializer.Deserialize<CustomerBasket>(BasketReturned!);
-            }
-
-            else
-                return null;
+            // Retrieve the basket back from Redis to ensure it was stored correctly
+            // Deserialize the JSON string back to a CustomerBasket object before returning
+            return await GetCustomerAsync(basket.Id);
 
         }
 
 
+
         public Task<bool> DaletaBasketAsync(string basketId) => _database.KeyDeleteAsync(basketId);
+
 
 
         public async Task<CustomerBasket?> GetCustomerAsync(string basketId)

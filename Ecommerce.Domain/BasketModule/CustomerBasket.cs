@@ -13,6 +13,6 @@ namespace Ecommerce.Domain.BasketModule
 
         public string Id { get; set; } = default!; // Created From Front-end [GUID]
 
-        ICollection<BasketItems> Items { get; set; } = [];
+        public ICollection<BasketItems> Items { get; set; } = [];
     }
 }
