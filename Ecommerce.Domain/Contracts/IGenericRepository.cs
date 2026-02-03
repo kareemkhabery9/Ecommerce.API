@@ -22,6 +22,8 @@ namespace Ecommerce.Domain.Contracts
 
         void Delete(TEntity entity);
 
+        Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications);
+
 
 
     }

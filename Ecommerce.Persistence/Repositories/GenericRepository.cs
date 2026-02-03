@@ -26,7 +26,12 @@ namespace Ecommerce.Persistence.Repositories
            await _dbContext.Set<TEntity>().AddAsync(entity);
         }
 
-
+        
+        public async Task<int> CountAsync(ISpecifications<TEntity, TKey> specifications)
+        {
+            return await SpecificationEvaluator.CreateQuery(_dbContext.Set<TEntity>(), specifications)
+                         .CountAsync();
+        }
 
         public void Delete(TEntity entity)
         {
@@ -63,6 +68,6 @@ namespace Ecommerce.Persistence.Repositories
            _dbContext.Set<TEntity>().Update(entity);
         }
 
-
+     
     }
 }
