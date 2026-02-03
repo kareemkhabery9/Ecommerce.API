@@ -17,7 +17,7 @@ namespace Ecommerce.Persistence.Repositories
         {
             _database = connection.GetDatabase();
         }
-        public async Task<CustomerBasket?> CreateOrUpdateAsync(CustomerBasket basket, TimeSpan timeToLive)
+        public async Task<CustomerBasket?> CreateOrUpdateAsync(CustomerBasket basket, TimeSpan timeToLive = default)
         {
             // Serialize the basket object to a JSON string for set it in Redis
             var jsonBasket = JsonSerializer.Serialize( basket );

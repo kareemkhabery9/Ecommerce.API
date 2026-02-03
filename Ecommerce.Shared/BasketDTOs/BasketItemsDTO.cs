@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ecommerce.Domain.BasketModule
+﻿namespace Ecommerce.Shared.BasketDTOs
 {
-    public class BasketItem
+    public class BasketItemsDTO
     {
         public int Id { get; set; }
 
