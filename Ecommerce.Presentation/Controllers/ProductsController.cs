@@ -43,6 +43,9 @@ namespace Ecommerce.Presentation.Controllers
         {
             var product = await _productService.GetProductByIdAsync(id);
 
+            if (product == null)
+                throw new Exception();
+
             return Ok(product);
         }
         

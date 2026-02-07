@@ -1,4 +1,5 @@
 
+using Ecommerce.API.CustomMiddleware;
 using Ecommerce.API.Externals;
 using Ecommerce.Domain.Contracts;
 using Ecommerce.Persistence.Data.Data_Seed;
@@ -64,6 +65,9 @@ namespace Ecommerce.API
 
             #region Configure PipeLine [MiddleWare]
             // Configure the HTTP request pipeline.
+            
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
