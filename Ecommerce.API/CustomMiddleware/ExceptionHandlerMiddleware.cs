@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Ecommerce.Services.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.API.CustomMiddleware
 {
@@ -22,7 +23,7 @@ namespace Ecommerce.API.CustomMiddleware
                 {
                     var Problem = new ProblemDetails()
                     {
-                        Title = "Error while processing your HTTP request -End point Not Found-",
+                        Title = "Error while processing your HTTP request - End point Not Found -",
                         Status = StatusCodes.Status404NotFound,
                         Detail = $"The requested endpoint '{httpContext.Request.Path}' was not found on the server.",
                         Instance = httpContext.Request.Path,
@@ -40,18 +41,24 @@ namespace Ecommerce.API.CustomMiddleware
                 // Set the response status code and content type (Return Custom Error Response)
 
                 //change the status code in network response to to 500 Internal Server Error
-                httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+               // httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                var Problem = new ProblemDetails()
+                var problem = new ProblemDetails()
                 {
-                    Title = "An error occurred while processing your request.",
-                    Status = StatusCodes.Status500InternalServerError,
+                    Title = "An error occurred while processing your request.",                
                     Detail = ex.Message,
                     Instance = httpContext.Request.Path,
+                    Status = ex switch
+                    {
+                        NotFoundException => StatusCodes.Status404NotFound,
+                        _ => StatusCodes.Status500InternalServerError,
+                    },
                 };
 
+                httpContext.Response.StatusCode = problem.Status.Value;
+
                 // then return the ProblemDetails as JSON in the response body
-                await httpContext.Response.WriteAsJsonAsync(Problem);
+                await httpContext.Response.WriteAsJsonAsync(problem);
 
             }
         }
