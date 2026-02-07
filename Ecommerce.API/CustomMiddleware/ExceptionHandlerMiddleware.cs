@@ -18,6 +18,18 @@ namespace Ecommerce.API.CustomMiddleware
             try
             {
                 await _next.Invoke(httpContext);
+                if(httpContext.Response.StatusCode == StatusCodes.Status404NotFound)
+                {
+                    var Problem = new ProblemDetails()
+                    {
+                        Title = "Error while processing your HTTP request -End point Not Found-",
+                        Status = StatusCodes.Status404NotFound,
+                        Detail = $"The requested endpoint '{httpContext.Request.Path}' was not found on the server.",
+                        Instance = httpContext.Request.Path,
+                    };
+
+                    await httpContext.Response.WriteAsJsonAsync(Problem);
+                }
             }
 
             catch (Exception ex)
