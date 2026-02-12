@@ -89,6 +89,15 @@ namespace Ecommerce.Shared.CommenResponses
 
 
 
+        //Operator overloading to make it easier to return values or errors without explicitly calling the factory methods
+
+        public static implicit operator Result<TValue>(TValue value) => Ok(value);
+
+        public static implicit operator Result<TValue>(Error error) => Fail(error);
+
+        public static implicit operator Result<TValue>(List<Error> errors) => Fail(errors);
+
+
     }
 
 
