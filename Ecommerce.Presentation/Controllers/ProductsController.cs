@@ -12,9 +12,7 @@ using System.Threading.Tasks;
 namespace Ecommerce.Presentation.Controllers
 {
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : ApiBaseController
     {
         private readonly IProductService _productService;
 
@@ -41,9 +39,9 @@ namespace Ecommerce.Presentation.Controllers
         // GET:BaseUrl/api/products/{id}
         public async Task<ActionResult<ProductDTO>> GetProductById(int id)
         {
-            var product = await _productService.GetProductByIdAsync(id);
+            var result = await _productService.GetProductByIdAsync(id);
 
-            return Ok(product);
+            return HandleResult<ProductDTO>(result);
         }
         
 

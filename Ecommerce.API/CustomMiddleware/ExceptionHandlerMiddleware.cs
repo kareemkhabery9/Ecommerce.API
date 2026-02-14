@@ -19,7 +19,7 @@ namespace Ecommerce.API.CustomMiddleware
             try
             {
                 await _next.Invoke(httpContext);
-                if(httpContext.Response.StatusCode == StatusCodes.Status404NotFound)
+                if(httpContext.Response.StatusCode == StatusCodes.Status404NotFound && !httpContext.Response.HasStarted)
                 {
                     var Problem = new ProblemDetails()
                     {
