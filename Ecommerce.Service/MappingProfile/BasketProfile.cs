@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ecommerce.Domain.BasketModule;
+using Ecommerce.Domain.Entities.BasketModule;
 using Ecommerce.Shared.BasketDTOs;
 using System;
 using System.Collections.Generic;

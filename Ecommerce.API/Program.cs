@@ -5,6 +5,7 @@ using Ecommerce.API.Factories;
 using Ecommerce.Domain.Contracts;
 using Ecommerce.Persistence.Data.Data_Seed;
 using Ecommerce.Persistence.Data.DbContexts;
+using Ecommerce.Persistence.IdentityData.DbContexts;
 using Ecommerce.Persistence.Repositories;
 using Ecommerce.Services;
 using Ecommerce.Services.Abstraction;
@@ -62,11 +63,19 @@ namespace Ecommerce.API
             });
 
 
+
+            builder.Services.AddDbContext<StoreIdentityDbContext>(Options =>
+            {
+                Options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
+            });
+
+
             #endregion
 
             var app = builder.Build();
 
             await app.MigrateDataBaseAsync();
+            await app.MigrateIdentityDataBaseAsync();
 
             await app.SeedDataAsync();
 

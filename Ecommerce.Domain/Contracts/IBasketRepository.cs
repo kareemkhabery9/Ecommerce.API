@@ -1,4 +1,4 @@
-﻿using Ecommerce.Domain.BasketModule;
+﻿using Ecommerce.Domain.Entities.BasketModule;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Ecommerce.Domain.Contracts;
-using Ecommerce.Domain.ProductModule;
+using Ecommerce.Domain.Entities.ProductModule;
 using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.Exceptions;
 using Ecommerce.Services.Specifications.ProductSpecifications;

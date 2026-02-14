@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Domain.Contracts;
 using Ecommerce.Persistence.Data.DbContexts;
+using Ecommerce.Persistence.IdentityData.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -17,6 +18,25 @@ namespace Ecommerce.API.Externals
             // I Can't use Any here because PendingMigrations is awaitable that mean it may be not be completed yet and it Enumerable data
             // note : Anyasync is used with IQueryable data not Enumerable data
             var PendingMigrations =await dbContext.Database.GetPendingMigrationsAsync();
+
+            if (PendingMigrations.Any())
+            {
+                dbContext.Database.Migrate();
+            }
+
+            return app;
+
+        }
+
+
+        public static async Task<WebApplication> MigrateIdentityDataBaseAsync(this WebApplication app)
+        {
+            await using var scope = app.Services.CreateAsyncScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<StoreIdentityDbContext>();
+
+            // I Can't use Any here because PendingMigrations is awaitable that mean it may be not be completed yet and it Enumerable data
+            // note : Anyasync is used with IQueryable data not Enumerable data
+            var PendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
 
             if (PendingMigrations.Any())
             {

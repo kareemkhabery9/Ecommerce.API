@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using AutoMapper.Execution;
-using Ecommerce.Domain.ProductModule;
+using Ecommerce.Domain.Entities.ProductModule;
 using Ecommerce.Shared.ProductDTOs;
 using Microsoft.Extensions.Configuration;
 using System;

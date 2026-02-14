@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Ecommerce.Domain.ProductModule;
+using Ecommerce.Domain.Entities.ProductModule;
 using Ecommerce.Shared.ProductDTOs;
 using System;
 using System.Collections.Generic;

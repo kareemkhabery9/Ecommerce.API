@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Domain.BasketModule
+namespace Ecommerce.Domain.Entities.BasketModule
 {
 
     // this entity wont be persisted in the database so we dont need to add any EF Core attributes, configurations or Migrations

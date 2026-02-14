@@ -1,5 +1,5 @@
-﻿using Ecommerce.Domain;
-using Ecommerce.Domain.Contracts;
+﻿using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

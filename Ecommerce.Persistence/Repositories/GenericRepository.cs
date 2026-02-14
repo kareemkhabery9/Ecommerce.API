@@ -1,5 +1,5 @@
-﻿using Ecommerce.Domain;
-using Ecommerce.Domain.Contracts;
+﻿using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities;
 using Ecommerce.Persistence.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

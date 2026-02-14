@@ -1,6 +1,6 @@
-﻿using Ecommerce.Domain;
-using Ecommerce.Domain.Contracts;
-using Ecommerce.Domain.ProductModule;
+﻿using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities;
+using Ecommerce.Domain.Entities.ProductModule;
 using Ecommerce.Persistence.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using System;

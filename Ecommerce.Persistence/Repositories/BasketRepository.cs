@@ -1,5 +1,5 @@
-﻿using Ecommerce.Domain.BasketModule;
-using Ecommerce.Domain.Contracts;
+﻿using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities.BasketModule;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;

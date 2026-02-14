@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Ecommerce.Domain.BasketModule;
 using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities.BasketModule;
 using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.Exceptions;
 using Ecommerce.Shared.BasketDTOs;

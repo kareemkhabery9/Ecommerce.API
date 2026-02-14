@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Domain
+namespace Ecommerce.Domain.Entities
 {
     public class BaseClass<TKey>
     {
