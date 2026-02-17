@@ -54,7 +54,7 @@ namespace Ecommerce.API.Externals
         {
             using var scope = app.Services.CreateScope();
 
-            var dataIntializer = scope.ServiceProvider.GetRequiredService<IDataIntializer>();
+            var dataIntializer = scope.ServiceProvider.GetRequiredKeyedService<IDataIntializer>("Default");
             await dataIntializer.IntailizeAsync();
 
             return app;
@@ -62,7 +62,15 @@ namespace Ecommerce.API.Externals
 
 
 
+        public static async Task<WebApplication> SeedIdentityDataAsync(this WebApplication app)
+        {
+            using var scope = app.Services.CreateScope();
 
+            var dataIntializer = scope.ServiceProvider.GetRequiredKeyedService<IDataIntializer>("Identity");
+            await dataIntializer.IntailizeAsync();
+
+            return app;
+        }
 
 
     }

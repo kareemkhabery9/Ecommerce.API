@@ -3,13 +3,16 @@ using Ecommerce.API.CustomMiddleware;
 using Ecommerce.API.Externals;
 using Ecommerce.API.Factories;
 using Ecommerce.Domain.Contracts;
+using Ecommerce.Domain.Entities.IdentityModule;
 using Ecommerce.Persistence.Data.Data_Seed;
 using Ecommerce.Persistence.Data.DbContexts;
+using Ecommerce.Persistence.IdentityData.DataSeed;
 using Ecommerce.Persistence.IdentityData.DbContexts;
 using Ecommerce.Persistence.Repositories;
 using Ecommerce.Services;
 using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.MappingProfile;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -37,7 +40,8 @@ namespace Ecommerce.API
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            builder.Services.AddScoped<IDataIntializer, DataIntializer>();
+            builder.Services.AddKeyedScoped<IDataIntializer, DataIntializer>("Default");
+            builder.Services.AddKeyedScoped<IDataIntializer, IdentityDataIntializer>("Identity");
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -69,6 +73,16 @@ namespace Ecommerce.API
                 Options.UseSqlServer(builder.Configuration.GetConnectionString("IdentityConnection"));
             });
 
+            //give all managers (userManger - roleManager - signInManager)
+            //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<StoreIdentityDbContext>();
+            
+
+            //give what i need here only userManger and roleManger 
+            builder.Services.AddIdentityCore<ApplicationUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<StoreIdentityDbContext>();
+                
 
             #endregion
 
@@ -78,6 +92,7 @@ namespace Ecommerce.API
             await app.MigrateIdentityDataBaseAsync();
 
             await app.SeedDataAsync();
+            await app.SeedIdentityDataAsync();
 
             #region Configure PipeLine [MiddleWare]
             // Configure the HTTP request pipeline.
