@@ -19,5 +19,12 @@ namespace Ecommerce.Services.Abstraction
         //EMail, Password, DisplayName,UserName ,PhoneNumber => Token, DisplayName, Email
         Task<Result<UserDTO>> RegisterAsync (RegisterDTO registerDTO);
 
+        //Check Email Exist
+        //Email => bool
+        Task<bool> CheckEmailExistAsync(string email);
+
+        //Get User By Email
+        Task<Result<UserDTO>> GetUserByEmailAsync(string email);
+
     }
 }

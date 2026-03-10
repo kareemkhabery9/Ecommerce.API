@@ -104,7 +104,7 @@ namespace Ecommerce.API
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidateLifetime = true,
-
+                  
                     ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
                     ValidAudience = builder.Configuration["JwtOptions:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:SecretKey"]!))
@@ -138,8 +138,8 @@ namespace Ecommerce.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
             app.UseAuthentication();
+            app.UseAuthorization();
 
 
             app.MapControllers(); 
