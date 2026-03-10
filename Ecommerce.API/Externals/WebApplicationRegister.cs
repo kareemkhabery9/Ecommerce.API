@@ -21,7 +21,7 @@ namespace Ecommerce.API.Externals
 
             if (PendingMigrations.Any())
             {
-                dbContext.Database.Migrate();
+                await dbContext.Database.MigrateAsync();
             }
 
             return app;

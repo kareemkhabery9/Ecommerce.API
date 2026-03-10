@@ -82,8 +82,9 @@ namespace Ecommerce.API
             builder.Services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<StoreIdentityDbContext>();
-                
 
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+                
             #endregion
 
             var app = builder.Build();
