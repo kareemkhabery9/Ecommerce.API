@@ -1,6 +1,8 @@
 ﻿using Ecommerce.Services.Abstraction;
 using Ecommerce.Shared.IdentityDTOs;
+using Ecommerce.Shared.IdentityDTOs.Ecommerce.Shared.IdentityDTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -58,6 +60,31 @@ namespace Ecommerce.Presentation.Controllers
             var email = User.FindFirstValue(ClaimTypes.Email);
             var result = await _authenticationService.GetUserByEmailAsync(email!);
 
+            return HandleResult(result);
+        }
+
+
+        [ProducesResponseType<AddressDTO>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status404NotFound)]
+        [ProducesResponseType<ProblemDetails>(StatusCodes.Status401Unauthorized)]
+        [Authorize]
+        [HttpGet("Address")]
+        //baseUsr/api/Authentication/Address
+
+        public async Task<ActionResult<AddressDTO>> GetAddress()
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var result = await _authenticationService.GetAddressAsync(email!);
+            return HandleResult(result);
+        }
+
+        [Authorize]
+        [HttpPut("Address")]
+        //baseUrl/api/Authentication/Address
+        public async Task<ActionResult<AddressDTO>> UpdateAddress(AddressDTO addressDTO)
+        {
+            var email = User.FindFirstValue(ClaimTypes.Email);
+            var result = await _authenticationService.UpdateUserAddressAsync(email!, addressDTO);
             return HandleResult(result);
         }
     }
