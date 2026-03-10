@@ -12,10 +12,12 @@ using Ecommerce.Persistence.Repositories;
 using Ecommerce.Services;
 using Ecommerce.Services.Abstraction;
 using Ecommerce.Services.MappingProfile;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using StackExchange.Redis;
 using System.Threading.Tasks;
 
@@ -89,7 +91,28 @@ namespace Ecommerce.API
             .AddRoleManager<RoleManager<IdentityRole>>();
 
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-                
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+
+                    ValidIssuer = builder.Configuration["JwtOptions:Issuer"],
+                    ValidAudience = builder.Configuration["JwtOptions:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JwtOptions:SecretKey"]!))
+
+                };
+
+            });
+
             #endregion
 
             var app = builder.Build();
@@ -116,6 +139,7 @@ namespace Ecommerce.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
+            app.UseAuthentication();
 
 
             app.MapControllers(); 
