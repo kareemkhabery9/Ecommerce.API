@@ -76,12 +76,17 @@ namespace Ecommerce.API
             //give all managers (userManger - roleManager - signInManager)
             //builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
             //    .AddEntityFrameworkStores<StoreIdentityDbContext>();
-            
+
 
             //give what i need here only userManger and roleManger 
-            builder.Services.AddIdentityCore<ApplicationUser>()
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<StoreIdentityDbContext>();
+            builder.Services.AddIdentityCore<ApplicationUser>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<StoreIdentityDbContext>()
+            .AddUserManager<UserManager<ApplicationUser>>()
+            .AddRoleManager<RoleManager<IdentityRole>>();
 
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
                 

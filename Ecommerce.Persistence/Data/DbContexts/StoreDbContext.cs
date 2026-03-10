@@ -1,4 +1,5 @@
-﻿using Ecommerce.Domain.Entities.ProductModule;
+﻿using Ecommerce.Domain.Entities.IdentityModule;
+using Ecommerce.Domain.Entities.ProductModule;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,10 @@ namespace Ecommerce.Persistence.Data.DbContexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<ApplicationUser>()
+              .HasIndex(u => u.Email)
+              .IsUnique();
         }
 
 
